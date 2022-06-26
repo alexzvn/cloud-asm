@@ -10,8 +10,8 @@ export interface RouterConfig {
   middleware?: RequestHandler[],
   gets?: Method
   posts?: Method
-  // puts: Method
-  // deletes: Method
+  puts: Method
+  deletes: Method
   // all: Method
 }
 
