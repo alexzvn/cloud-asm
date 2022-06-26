@@ -11,7 +11,7 @@ const entries = dirname('./src/entry/entry')
 export const setup = async (app) => {
   console.log('Connecting ......... MongoDB')
 
-  // await client.connect()
+  await client.connect()
 
   console.log('Connected to MongoDB')
 

@@ -1,9 +1,11 @@
 import 'dotenv/config'
+import { nanoid } from 'nanoid'
 import express from 'express'
 import session from 'express-session'
 import { engine } from 'express-handlebars'
 import { setup } from './src/entry.js'
-import { nanoid } from 'nanoid'
+
+import { log } from './src/utils/router.js'
 import { ErrorRefresh, InputRefresh } from './src/utils/session.js'
 
 const app = express()
@@ -28,4 +30,4 @@ const start = () => app.listen(process.env.PORT, () => {
   console.log(`Server is running on port http://0.0.0.0:${process.env.PORT}`)
 })
 
-setup(app).then(start)
+setup(app).then(start).then(log)

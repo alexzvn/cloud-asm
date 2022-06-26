@@ -1,8 +1,7 @@
 import { Router } from 'express'
 import { join } from 'path'
 
-let ordered = false
-let routes = []
+const routes = []
 
 const consume = (method = '', ...path) => {
   path = join('/', ...path)
@@ -15,8 +14,6 @@ const consume = (method = '', ...path) => {
   }[method.toLocaleUpperCase()] ?? '\x1b[0m%s'
 
   routes.push([path, color, `${method.toUpperCase()} ........... ${path}`])
-
-  ordered = false
 }
 
 /**
@@ -56,13 +53,7 @@ export const defineRouter = (config) => {
   return router
 }
 
-const sort = () => routes = routes.sort((b, a) => {
-  return a.length - b.length
-})
-
 export const log = () => {
-  !ordered && sort()
-
   for (const [_, color, uri] of routes) [
     console.log(color, uri)
   ]
