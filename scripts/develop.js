@@ -1,13 +1,8 @@
 import { spawn } from 'child_process'
 
 const output = (proc) => {
-  proc.stdout.on('data', (data) => {
-    console.log(data.toString())
-  })
-
-  proc.stderr.on('data', (data) => {
-    console.error(data.toString())
-  })
+  proc.stdout.pipe(process.stdout)
+  proc.stderr.pipe(process.stderr)
 }
 
 const styles = [
