@@ -1,13 +1,4 @@
-import { Router } from "express"
 import { client } from "./utils/mongo.js"
-
-const router = Router()
-
-router.all('/*', (req, _, next) => {
-  req.app.locals.layout = 'main'
-
-  next()
-})
 
 /**
  * 
@@ -16,7 +7,18 @@ router.all('/*', (req, _, next) => {
 export const setup = async (app) => {
   await client.connect()
 
-  console.log('Connected to MongoDB');
+  console.log('Connected to MongoDB')
 
-  app.use('/', router)
+  const routers = await Promise.all( [
+    import('./entry/auth.js')
+  ])
+
+  app.all('/*', (req, _, next) => {
+    req.app.locals.layout = 'main'
+    next()
+  })
+
+  for (const [prefix, router] of routers) {
+    app.use(prefix, router)
+  }
 }
