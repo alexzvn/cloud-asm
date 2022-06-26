@@ -1,7 +1,12 @@
 import { Router } from 'express'
 import { join } from 'path'
 
-const print = (method = '', ...path) => {
+let ordered = false
+let routes = []
+
+const consume = (method = '', ...path) => {
+  path = join('/', ...path)
+
   const color = {
     GET: '\x1b[32m%s\x1b[0m',
     POST: "\x1b[33m%s\x1b[0m",
@@ -9,7 +14,9 @@ const print = (method = '', ...path) => {
     DELETE: "\x1b[35m%s\x1b[0m",
   }[method.toLocaleUpperCase()] ?? '\x1b[0m%s'
 
-  console.log(color, `${method.toUpperCase()} ........... ${join('/', ...path)}`)
+  routes.push([path, color, `${method.toUpperCase()} ........... ${path}`])
+
+  ordered = false
 }
 
 /**
@@ -37,7 +44,7 @@ export const defineRouter = (config) => {
 
       register(join(prefix, path), ...handlers)
 
-      print(type, prefix, path)
+      consume(type, prefix, path)
     }
   }
 
@@ -47,4 +54,16 @@ export const defineRouter = (config) => {
   mapper(deletes, (path, ...handler) => router.post(path, ...handler), 'DEL ')
 
   return router
+}
+
+const sort = () => routes = routes.sort((b, a) => {
+  return a.length - b.length
+})
+
+export const log = () => {
+  !ordered && sort()
+
+  for (const [_, color, uri] of routes) [
+    console.log(color, uri)
+  ]
 }
