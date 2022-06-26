@@ -1,26 +1,24 @@
 import { client } from "./utils/mongo.js"
+import home from "./entry/home.js"
+import auth from './entry/auth.js'
 
 /**
  * 
  * @param {import('express').Express} app 
  */
 export const setup = async (app) => {
+  console.log('Connecting ......... MongoDB')
+
   await client.connect()
 
   console.log('Connected to MongoDB')
-
-  const routers = await Promise.all( [
-    import('./entry/auth.js')
-  ])
 
   app.all('/*', (req, _, next) => {
     req.app.locals.layout = 'main'
     next()
   })
 
-  // for (const [prefix, router] of routers) {
-    // console.log(prefix);
 
-    // app.use(prefix, router)
-  // }
+  app.use(home)
+  app.use(auth)
 }

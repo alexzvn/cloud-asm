@@ -1,9 +1,12 @@
-import { Router } from 'express'
-import { collection } from './utils/mongo.js'
+import { defineRouter } from '../utils/router.js'
 
-const router = Router()
-const users = collection('users')
+/**
+ * @type {import('../utils/route').DefineRouter}
+ */
+export default defineRouter({
+  prefix: '/',
 
-
-
-export default router
+  gets: {
+    '/': (req, res) => res.render('index.hbs')
+  }
+})

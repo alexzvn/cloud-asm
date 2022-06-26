@@ -31,9 +31,11 @@ export const Unauthenticated = (req, res, next) => {
  * @type {import('../utils/route').DefineRouter}
  */
 export default defineRouter({
+  prefix: '/',
+
   gets: {
-    login: (req, res) => res.render('auth/login'),
-    register: (req, res) => res.render('auth/register'),
+    login: (req, res) => res.render('auth/login.hbs'),
+    register: (req, res) => res.render('auth/register.hbs'),
   },
 
   posts: {
@@ -44,7 +46,7 @@ export default defineRouter({
       const user = await users.findOne({ username })
 
       if (! user || ! await compare(password, user.password)) {
-        return res.render('auth/login', error)
+        return res.render('auth/login.hbs', error)
       }
 
       req.session.user = user
@@ -84,5 +86,5 @@ export default defineRouter({
 
       res.redirect('/')
     },
-  }
+  },
 })
