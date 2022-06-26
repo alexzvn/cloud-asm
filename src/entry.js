@@ -1,6 +1,8 @@
 import { client } from "./utils/mongo.js"
-import home from "./entry/home.js"
-import auth from './entry/auth.js'
+import { readdir } from 'fs/promises'
+import { dirname } from "path"
+
+const entries = dirname('./src/entry/entry')
 
 /**
  * 
@@ -9,7 +11,7 @@ import auth from './entry/auth.js'
 export const setup = async (app) => {
   console.log('Connecting ......... MongoDB')
 
-  await client.connect()
+  // await client.connect()
 
   console.log('Connected to MongoDB')
 
@@ -18,7 +20,11 @@ export const setup = async (app) => {
     next()
   })
 
+  const files = await Promise.all(
+    (await readdir(entries)).map(file => import(`./entry/${file}`))
+  )
 
-  app.use(home)
-  app.use(auth)
+  for (const file of files ) {
+    app.use(file.default)
+  }
 }
