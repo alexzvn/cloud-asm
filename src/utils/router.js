@@ -18,7 +18,7 @@ const mapper = (method, register) => {
 export const defineRouter = (config) => {
   const router = Router()
 
-  const { init, middleware, gets, posts } = config
+  const { init, middleware, gets, posts, prefix } = config
 
   init && router.use(init)
 
@@ -26,8 +26,8 @@ export const defineRouter = (config) => {
     Array.isArray(middleware) ? middleware.forEach(m => router.use(m)) : router.use(middleware)
   }
 
-  mapper(gets, router.get)
-  mapper(posts, router.post)
+  mapper(gets, (path, ...handler) => router.get(path, ...handler))
+  mapper(posts, (path, ...handler) => router.post(path, ...handler))
 
   return [prefix, router]
 }

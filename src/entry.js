@@ -18,7 +18,9 @@ export const setup = async (app) => {
     next()
   })
 
-  for (const [prefix, router] of routers) {
-    app.use(prefix, router)
-  }
+  // for (const [prefix, router] of routers) {
+    // console.log(prefix);
+
+    // app.use(prefix, router)
+  // }
 }

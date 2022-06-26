@@ -11,18 +11,18 @@ const app = express()
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 
-app.use(express.static('public'))
-  .use(express.json())
-  .use(express.urlencoded({ extended: true }))
-  .use(ErrorRefresh)
-  .use(InputRefresh)
-
 app.use(session({
   secret: process.env.APP_KEY || 'secret',
   resave: true,
   saveUninitialized: true,
   genid: (req) => nanoid(),
 }))
+
+app.use(express.static('public'))
+  .use(express.json())
+  .use(express.urlencoded({ extended: true }))
+  .use(ErrorRefresh)
+  .use(InputRefresh)
 
 const start = () => app.listen(process.env.PORT, () => {
   console.log(`Server is running on port http://0.0.0.0:${process.env.PORT}`)

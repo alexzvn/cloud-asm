@@ -1,13 +1,13 @@
-import { collection } from '../utils/mongo'
+import { collection } from '../utils/mongo.js'
 import { genSalt, compare, hash } from 'bcrypt'
-import { defineRouter } from '../utils/router'
+import { defineRouter } from '../utils/router.js'
 
 const users = collection('users')
 
 /**
  * @type {import('express').RequestHandler}
  */
-export const Authenticated = (req, res, next) => {
+export const Authenticated = async (req, res, next) => {
   const { user } = req.session
 
   if (! user) return next(new Error('Unauthorized'))
