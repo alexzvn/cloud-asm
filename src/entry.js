@@ -1,7 +1,9 @@
-import { client } from "./utils/mongo.js"
 import { readdir } from 'fs/promises'
-import { dirname } from "path"
+import { dirname, resolve } from "path"
+import hbs from 'hbs'
+import { client } from "./utils/mongo.js"
 
+hbs.registerPartials(resolve('./views/partials'))
 const entries = dirname('./src/entry/entry')
 
 /**
