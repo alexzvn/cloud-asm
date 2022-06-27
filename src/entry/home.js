@@ -12,8 +12,8 @@ export default defineRouter({
   gets: {
     '/': async (req, res) => {
       res.render('index.hbs', {
-        products: new Array(40).fill(await products.findOne())
-        // products: await products.find().sort({ _id: 1 }).toArray(),
+        // products: new Array(40).fill(await products.findOne())
+        products: await products.find().sort({ _id: 1 }).toArray(),
       })
     }
   }
