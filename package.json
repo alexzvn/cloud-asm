@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "node ./scripts/develop.js",
     "build": "tailwind -i style.css -o public/style.css -m",
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
