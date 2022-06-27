@@ -19,3 +19,13 @@ export const isError = (validation) => {
 export const isUrl = (url) => {
   return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url)
 }
+
+/**
+ * 
+ * @param {any[]} items 
+ */
+export const addIndexes = (items, start = 1) => {
+  let index = start
+
+  return items.map(item => ({ ...item, index: index++ }))
+}
