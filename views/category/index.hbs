@@ -1,0 +1,49 @@
+<div class="py-5">
+  <div class="max-w-4xl mx-auto grid grid-cols-3 gap-5">
+
+    <form class="card bg-white shadow-md" method="post" action="/categories/create">
+      <div class="card-body">
+        <h2 class="text-xl font-medium">Create a category</h2>
+
+        <div class="form-control w-full">
+          <label class="label">Category name</label>
+          <input name="name" type="text" placeholder="Type here" class="input input-sm" />
+          {{#if errors.name}}
+            <p class="text-red-500 text-xs italic">{{errors.name}}</p>
+          {{/if}}
+        </div>
+
+        <div class="flex mt-2">
+          <button class="btn btn-sm w-full">Create</button>
+        </div>
+
+      </div>
+    </form>
+
+    <div class="card bg-white col-span-2">
+      <div class="card-body overflow-x-auto">
+        <table class="table w-full">
+          <!-- head -->
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Action</th>
+          </tr>
+
+          <!-- body -->
+          {{#each categories}}
+            <tr>
+              <td>{{ index }}</td>
+              <td>{{ name }}</td>
+              <td>
+                <a class="underline text-primary" href="/categories/{{ id }}/">Edit</a>
+                <a class="underline text-primary" href="/categories/{{ id }}/delete">Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="p-6 grid place-content-center">
+ <form class="card bg-white shadow-md" method="post" action="/categories/{{ category.id }}/update">
+    <div class="card-body">
+      <h2 class="text-xl font-medium">Update category</h2>
+
+      <div class="form-control w-full">
+        <label class="label">Category name</label>
+        <input name="name" type="text" placeholder="Type here" value="{{ category.name }}" class="input input-sm" />
+        {{#if errors.name}}
+          <p class="text-red-500 text-xs italic">{{errors.name}}</p>
+        {{/if}}
+      </div>
+
+      <div class="flex mt-2">
+        <button class="btn btn-primary btn-sm w-full">Update</button>
+      </div>
+
+    </div>
+  </form>
+</div>
