@@ -1,0 +1,68 @@
+<div class="py-5">
+  <div class="container mx-auto grid grid-cols-3">
+
+    <form class="card bg-white shadow-md" method="post" action="/products/create">
+      <div class="card-body">
+        <h2 class="text-xl font-medium">Create a Product</h2>
+
+        <div class="form-control w-full">
+          <label class="label">Product name</label>
+          <input name="name" type="text" placeholder="Type here" class="input input-sm" />
+          {{#if errors.name}}
+            <p class="text-red-500 text-xs italic">{{errors.name}}</p>
+          {{/if}}
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">Price</label>
+          <input name="price" type="number" value="0" class="input input-sm" />
+          {{#if errors.price}}
+            <p class="text-red-500 text-xs italic">{{errors.price}}</p>
+          {{/if}}
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <div>Image <span class="text-xs">(url)</span></div>
+          </label>
+          <input name="image" type="text" placeholder="Type here" class="input input-sm" />
+          {{#if errors.image}}
+            <p class="text-red-500 text-xs italic">{{errors.image}}</p>
+          {{/if}}
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">Category</label>
+          <select name="category" class="select select-sm">
+            <option value="" selected="selected">Please select category</option>
+            {{#each categories }}
+              <option value="{{ id }}">{{ name }}</option>
+            {{/each }}
+          </select>
+          {{#if errors.category}}
+            <p class="text-red-500 text-xs italic">{{errors.category}}</p>
+          {{/if}}
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <div>Description <span class="text-xs">(optional)</span></div>
+          </label>
+          <textarea name="description" class="textarea w-full"></textarea>
+          {{#if errors.description}}
+            <p class="text-red-500 text-xs italic">{{errors.description}}</p>
+          {{/if}}
+        </div>
+
+        <div class="flex mt-2">
+          <button class="btn btn-sm w-full">Create</button>
+        </div>
+
+      </div>
+    </form>
+
+    <div class="col-span-2">
+
+    </div>
+  </div>
+</div>
