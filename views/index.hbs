@@ -1,1 +1,31 @@
-<h1>{{ message }}</h1>
+<div class="hero bg-base-200" style="min-height: 70vh; background: url('/media/background2.jpg')">
+  <div class="hero-content flex-col lg:flex-row">
+    <img src="https://api.lorem.space/image/movie?w=260&h=400" class="max-w-sm rounded-lg shadow-2xl" />
+    <div>
+      <h1 class="text-5xl font-bold">Box Office News!</h1>
+      <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+      <button class="btn btn-primary">Get Started</button>
+    </div>
+  </div>
+</div>
+
+<div class="flex justify-center mt-10">
+  <h1 class="font-light text-3xl">Our Collections</h1>
+</div>
+
+<div class="container mx-auto py-5 grid grid-cols-4 gap-5">
+  {{#each products}}
+    <div class="card card-compact bg-white shadow col-span-1">
+      <figure>
+        <img class="aspect-square object-cover" src="{{ image }}" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ name }}</h2>
+        <p>{{ description }}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-secondary btn-sm">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
