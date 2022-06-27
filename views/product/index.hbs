@@ -1,5 +1,5 @@
 <div class="py-5">
-  <div class="container mx-auto grid grid-cols-3">
+  <div class="container mx-auto grid grid-cols-3 gap-5">
 
     <form class="card bg-white shadow-md" method="post" action="/products/create">
       <div class="card-body">
@@ -34,7 +34,7 @@
         <div class="form-control w-full">
           <label class="label">Category</label>
           <select name="category" class="select select-sm">
-            <option value="" selected="selected">Please select category</option>
+            <option value="">Please select category</option>
             {{#each categories }}
               <option value="{{ id }}">{{ name }}</option>
             {{/each }}
@@ -61,8 +61,48 @@
       </div>
     </form>
 
-    <div class="col-span-2">
+    <div class="card bg-white col-span-2">
+      <div class="card-body overflow-x-auto">
+        <table class="table w-full">
+          <!-- head -->
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Action</th>
+          </tr>
 
+          <!-- body -->
+          {{#each products}}
+            <tr>
+              <td>{{ index }}</td>
+              <td>{{ name }}</td>
+              <td>{{ price }}</td>
+              <td><img src="{{ image }}" class="w-32 h-32 object-cover"></td>
+              <td>{{ category }}</td>
+              <td>
+                <a class="underline text-primary" href="/products/{{ id }}/">Edit</a>
+                <a class="underline text-primary" href="/products/{{ id }}/delete">Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+
+        </table>
+
+        <div class="flex justify-center">
+          <div class="btn-group grid grid-cols-2">
+            {{#if paginator.prev }}
+            <a href="?page={{paginator.p}}" class="btn btn-outline">Prev</a>
+            {{/if }}
+
+            {{#if paginator.next }}
+            <a href="?page={{paginator.n}}" class="btn btn-outline">Next</a>
+            {{/if }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

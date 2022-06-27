@@ -1,5 +1,63 @@
-<div class="min-h-screen grid place-content-center">
-  <div class="max-w-xl w-full rounded-md p-4 bg-white shadow-lg">
-    <h1>Update product</h1>
-  </div>
+<div class="flex justify-center py-10">
+  <form class="card bg-white shadow-md max-w-lg w-full" method="post" action="/products/{{ product.id }}/update">
+      <div class="card-body">
+        <h2 class="text-xl font-medium">Update Product</h2>
+
+        <img src="{{ product.image }}" class="aspect-video object-cover rounded-xl">
+
+        <div class="form-control w-full">
+          <label class="label">Product name</label>
+          <input name="name" type="text" placeholder="Type here" value="{{ product.name }}" class="input input-sm" />
+          {{#if errors.name}}
+            <p class="text-red-500 text-xs italic">{{errors.name}}</p>
+          {{/if}}
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">Price</label>
+          <input name="price" type="number" value="{{ product.price }}" class="input input-sm" />
+          {{#if errors.price}}
+            <p class="text-red-500 text-xs italic">{{errors.price}}</p>
+          {{/if}}
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <div>Image <span class="text-xs">(url)</span></div>
+          </label>
+          <input name="image" type="text" value="{{ product.image }}" placeholder="Type here" class="input input-sm" />
+          {{#if errors.image}}
+            <p class="text-red-500 text-xs italic">{{errors.image}}</p>
+          {{/if}}
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">Category</label>
+          <select name="category" class="select select-sm">
+            <option value="">Please select category</option>
+            {{#each categories }}
+              <option value="{{ id }}" {{#if selected}} selected="selected" {{/if}}>{{ name }}</option>
+            {{/each }}
+          </select>
+          {{#if errors.category}}
+            <p class="text-red-500 text-xs italic">{{errors.category}}</p>
+          {{/if}}
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <div>Description <span class="text-xs">(optional)</span></div>
+          </label>
+          <textarea name="description" class="textarea w-full"></textarea>
+          {{#if errors.description}}
+            <p class="text-red-500 text-xs italic">{{errors.description}}</p>
+          {{/if}}
+        </div>
+
+        <div class="flex mt-2">
+          <button class="btn btn-sm w-full">Update</button>
+        </div>
+
+      </div>
+    </form>
 </div>
