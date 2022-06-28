@@ -60,7 +60,7 @@
 </div>
 
 {{#each products}}
-<input type="checkbox" id="image-{{id}}" class="modal-toggle" />
+<input type="checkbox" id="image-{{id}}" class="modal-toggle previewer" />
 <div class="modal">
   <div class="modal-box" style="padding: 0; min-width: 50vw;">
     <label for="image-{{id}}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
@@ -77,6 +77,18 @@ for (const figure of figures) {
 
   figure.addEventListener('click', (e) => {
     document.querySelector('#image-' + e.target.dataset.id).click()
+  })
+}
+
+for (const previewer of document.querySelectorAll('.previewer')) {
+  previewer.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      document.body.classList.add('overflow-hidden')
+      document.body.classList.add('h-screen')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+      document.body.classList.remove('h-screen')
+    }
   })
 }
 </script>
