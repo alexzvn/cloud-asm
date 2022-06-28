@@ -11,10 +11,11 @@ export default defineRouter({
 
   gets: {
     '/': async (req, res) => {
-      res.render('index.hbs', {
-        // products: new Array(40).fill(await products.findOne())
-        products: await products.find().sort({ _id: 1 }).toArray(),
-      })
+      const items = req.query.search ?
+        await products.find({ name: { $regex: req.query.search, $options: 'i' } }).toArray() :
+        await products.find().toArray()
+
+      res.render('index.hbs', { products: items, search: req.query.search })
     }
   }
 })
