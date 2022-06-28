@@ -25,7 +25,6 @@
       </form>
     </div>
 
-
   </div>
 </div>
 
@@ -42,8 +41,8 @@
 <div class="container mx-auto py-5 grid grid-cols-4 gap-5" style="min-height: 50vh;">
   {{#each products}}
     <div class="card card-compact bg-white shadow col-span-1">
-      <figure>
-        <img class="aspect-square object-cover" src="{{ image }}" />
+      <figure class="cursor-pointer preview">
+        <img class="aspect-square object-cover" src="{{ image }}" data-id="{{ id }}" />
       </figure>
       <div class="card-body">
         <h2 class="card-title">{{ name }}</h2>
@@ -59,3 +58,25 @@
     </div>
   {{/each}}
 </div>
+
+{{#each products}}
+<input type="checkbox" id="image-{{id}}" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box" style="padding: 0; min-width: 50vw;">
+    <label for="image-{{id}}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+    <img class="rounded-lg w-full h-full" src="{{ image }}" alt="">
+  </div>
+</div>
+{{/each}}
+
+
+<script> 
+const figures = document.querySelectorAll('.preview')
+
+for (const figure of figures) {
+
+  figure.addEventListener('click', (e) => {
+    document.querySelector('#image-' + e.target.dataset.id).click()
+  })
+}
+</script>
