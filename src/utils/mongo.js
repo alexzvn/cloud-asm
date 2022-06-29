@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb"
 
 const dsn = process.env.MONGO_DSN || "mongodb://localhost:27017"
 
-const database = process.env.MONGODB_DATABASE || "test"
+const database = process.env.MONGO_DATABASE || "test"
 
 export const client = new MongoClient(dsn, { useNewUrlParser: true })
 
